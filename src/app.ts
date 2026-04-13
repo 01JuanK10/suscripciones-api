@@ -2,6 +2,8 @@ import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import clienteRoutes from './routes/cliente.routes'
 import transaccionesRoutes from './routes/transacciones.routes'
+import { getAllFondos } from './controllers/fondos.controller';
+import fondos from './routes/fondos.routes'
 
 const app = express();
 app.use(cors());
@@ -15,6 +17,7 @@ app.use(express.json());
 
 app.use('/clientes', clienteRoutes );
 app.use('/transacciones', transaccionesRoutes);
+app.use("/fondos", fondos)
 
 // 404 handler
 app.use((req: Request, res: Response, next: NextFunction) => {
