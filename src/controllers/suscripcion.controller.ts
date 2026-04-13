@@ -141,3 +141,12 @@ export const desuscribirse = async (req: Request, res: Response) => {
     }
 }
 
+export const getSuscripcionesByClienteId = async (req: Request, res: Response) => {
+  try{
+    const suscripciones = await repoSuscripcion.find({relations: ["cliente", "fondos"]});
+    res.status(200).json(suscripciones);
+  }catch(error){
+    res.status(500).json({'code': 500, 'error': "error obteniendo las suscripciones del cliente " + req.params.id})
+  }
+}
+
