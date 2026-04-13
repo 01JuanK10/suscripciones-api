@@ -11,6 +11,7 @@ app.use(express.json());
 // import apiRoutes from './routes/api.routes';
 // app.use('/api', apiRoutes);
 
+
 // 404 handler
 app.use((req: Request, res: Response, next: NextFunction) => {
   res.status(404).json({
