@@ -17,7 +17,7 @@ export class Clientes {
     telefono: string;
 
     @Column()
-    montoMin: number;
+    saldo: number;
 
     @OneToMany( () => ClienteFondos, (clienteFondos) => {clienteFondos.cliente})
     clienteFondos: ClienteFondos[];
