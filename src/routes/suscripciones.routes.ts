@@ -3,8 +3,8 @@ import { desuscribirse, suscribirse } from '../controllers/suscripcion.controlle
 
 const router = Router();
 
-router.post('/suscripcion/', suscribirse);
-router.post('/suscripcion/', desuscribirse);
+router.post('/suscribirse', suscribirse);
+router.post('/desuscribirse', desuscribirse);
 
 
 export default router;

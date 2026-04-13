@@ -4,11 +4,11 @@ import { Clientes } from '../models/cliente.model';
 import { ClienteFondos } from '../models/clienteFondo.model';
 import { Fondos } from '../models/fondos.model';
 import { Transaccion } from '../models/transaccion.model';
-import tr from 'zod/v4/locales/tr.js';
 
 const repoClientes = AppDataSource.getRepository(Clientes);
 const repoSuscripcion = AppDataSource.getRepository(ClienteFondos);
 const repoFondos = AppDataSource.getRepository(Fondos);
+const repoTransaccion = AppDataSource.getRepository(Transaccion);
 
 export const getAll = async (req: Request, res: Response) => {
   // Implement your logic here
@@ -31,6 +31,14 @@ export const suscribirse = async (req: Request, res: Response) => {
 
         suscripcion.cliente = clienteSaved;
         const suscripcionSaved = await repoSuscripcion.save(suscripcion);
+
+        let transaccion = new Transaccion();
+        transaccion.fecha = new Date().toISOString();
+        transaccion.tipo = true;
+        transaccion.clienteFondos = [suscripcionSaved];
+
+        await repoTransaccion.save(transaccion);
+
         res.status(201).json(suscripcionSaved)
       }else{
         res.status(404).json({"message": "cliente o fondo no encontrado"});
@@ -51,21 +59,22 @@ export const desuscribirse = async (req: Request, res: Response) => {
       if(cliente && fondo){
         let suscripcion = new ClienteFondos();
 
-        cliente.saldo = cliente.saldo - fondo.montoMin;
+        cliente.saldo = cliente.saldo + fondo.montoMin;
         suscripcion.cliente = cliente;
         suscripcion.fondos = fondo;
         const clienteSaved = await repoClientes.save(cliente);
 
         suscripcion.cliente = clienteSaved;
         const suscripcionSaved = await repoSuscripcion.save(suscripcion);
-        res.status(201).json(suscripcionSaved)
 
         let transaccion = new Transaccion();
         transaccion.fecha = new Date().toISOString();
-        transaccion.tipo = true;
+        transaccion.tipo = false;
         transaccion.clienteFondos = [suscripcionSaved];
 
+        await repoTransaccion.save(transaccion);
 
+        res.status(201).json(suscripcionSaved)
       }else{
         res.status(404).json({"message": "cliente o fondo no encontrado"});
         return;
