@@ -6,7 +6,7 @@ const repo = AppDataSource.getRepository(Fondos);
 
 export const getAllFondos = async (req: Request, res: Response) => {
     try {
-        let fondos: Fondos[] = await repo.find();
+        let fondos: Fondos[] = await repo.find({relations: ["categoria"]});
         console.log(fondos);
         res.status(200).json(fondos);
     } catch (error) {
