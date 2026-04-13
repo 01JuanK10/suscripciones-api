@@ -8,12 +8,12 @@ export class Transaccion {
     id: number;
 
     @Column()
-    fecha: string ;
+    fecha: string;
 
     @Column()
     tipo: boolean;
 
     @ManyToOne( () => ClienteFondos, (clienteFondos) =>{ clienteFondos.transacciones })
-    clienteFondos: ClienteFondos[];
+    clienteFondos: ClienteFondos;
 
 }
