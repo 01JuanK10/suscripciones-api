@@ -3,8 +3,6 @@ import cors from 'cors';
 import clienteRoutes from './routes/cliente.routes'
 import transaccionesRoutes from './routes/transacciones.routes'
 import suscripcionesRoutes from './routes/suscripciones.routes'
-
-import { getAllFondos } from './controllers/fondos.controller';
 import fondos from './routes/fondos.routes'
 
 const app = express();
@@ -19,8 +17,8 @@ app.use(express.json());
 
 app.use('/clientes', clienteRoutes );
 app.use('/transacciones', transaccionesRoutes);
-app.use("/fondos", fondos)
-app.use('/suscripciones', suscripcionesRoutes )
+app.use("/fondos", fondos);
+app.use('/suscripciones', suscripcionesRoutes );
 
 // 404 handler
 app.use((req: Request, res: Response, next: NextFunction) => {
