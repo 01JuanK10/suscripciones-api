@@ -2,10 +2,14 @@
 import http from 'node:http';
 import app from './src/app';
 import dotenv from 'dotenv';
-
-// Config .env
 dotenv.config();
 
+import { AppDataSource } from './src/config/app-data-source';
+
+// Config .env
+AppDataSource.initialize().then(() =>{
+  console.log("Data Source has been initialized!");
+});
 // Server creation
 const server = http.createServer(app);
 
