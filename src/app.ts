@@ -1,6 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import clienteRoutes from './routes/cliente.routes'
+import transaccionesRoutes from './routes/transacciones.routes'
 
 const app = express();
 app.use(cors());
@@ -13,6 +14,7 @@ app.use(express.json());
 // app.use('/api', apiRoutes);
 
 app.use('/clientes', clienteRoutes );
+app.use('/transacciones', transaccionesRoutes);
 
 // 404 handler
 app.use((req: Request, res: Response, next: NextFunction) => {
