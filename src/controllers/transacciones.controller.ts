@@ -25,4 +25,6 @@ export const createTransaccion = async (req: Request, res: Response) => {
         res.status(500).json({ 'code': 500, 'error': "Error creando la transaccion" });
     }
 
+    
+
 }
