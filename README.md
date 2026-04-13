@@ -82,7 +82,7 @@ El `docker-compose.yml` expone MariaDB en `3308`.
    ```
 2. Si usas Docker, actualiza temporalmente en `.env`:
    ```env
-   MARIADB_PORT=3308
+   MARIADB_PORT=3306
    ```
 3. Ejecuta la API:
    ```bash
