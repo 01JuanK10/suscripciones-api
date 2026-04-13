@@ -25,6 +25,17 @@ export const createTransaccion = async (req: Request, res: Response) => {
         res.status(500).json({ 'code': 500, 'error': "Error creando la transaccion" });
     }
 
+}
+
+export const getTransaccionesByFondoId = async (_req: Request, res: Response) => {
+        try {
+        const transacciones = await transaccionRepo.find({relations: ["clienteFondos"]});
+        res.status(200).json(transacciones);
+    
+        } catch (error) {
+            res.status(500).json({ 'code': 500, 'error': "Error encontrando las transacciones" });
+        }
+}
+
     
 
-}
