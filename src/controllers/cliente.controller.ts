@@ -53,8 +53,8 @@ export const createCliente = async (req: Request, res: Response) => {
         
         let cliente: Clientes = new Clientes();
         cliente.id = req.body.id;
-        cliente.nombre = req.body.nombre;
-        cliente.email = req.body.email;
+        cliente.nombre = (req.body.nombre as string).toLowerCase();
+        cliente.email = (req.body.email as string).toLowerCase();
         cliente.telefono = req.body.telefono;
         cliente.saldo = 500000;
         const clienteSaved = await repo.save(cliente);
