@@ -6,7 +6,7 @@ services:
     container_name: mariadb
     restart: unless-stopped
     ports:
-      - "3308:3306"
+      - "3306:3306"
     environment:
       MARIADB_DATABASE: app_db
       MARIADB_ROOT_PASSWORD: root123
